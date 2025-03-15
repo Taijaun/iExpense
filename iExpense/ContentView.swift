@@ -47,7 +47,7 @@ class Expenses {
 
 struct ContentView: View {
     @State private var expenses = Expenses()
-    @State private var showingAddExpense = false
+    //@State private var showingAddExpense = false
     
     let currencyOptions = ["GBP", "USD", "EUR", "AUD", "CAD", "JPY"]
     
@@ -90,18 +90,21 @@ struct ContentView: View {
                     }
                 }
                 .navigationTitle("iExpense")
-                .sheet(isPresented: $showingAddExpense) {
-                    // show addview here
-                    AddView(expenses: expenses)
-                }
+//                .sheet(isPresented: $showingAddExpense) {
+//                    // show addview here
+//                    AddView(expenses: expenses)
+            
                 .toolbar {
-                    Button("Add Expense", systemImage: "plus") {
-                        showingAddExpense = true
-                    }
+                    ToolbarItem(placement: .topBarTrailing) {
+                        NavigationLink(destination: AddView(expenses: expenses)) {
+                            Image(systemName: "plus")
+                        }
                 }
                 
                 
             }
+                }
+                
         }
     func expenseRow(for item: ExpenseItem) -> some View {
         HStack{
